@@ -1,0 +1,17 @@
+{
+  "r2_score": 0.9316,
+  "mae": 19434.04,
+  "rmse": 62452.43,
+  "mse": 3900306553.75,
+  "feature_importances": {
+    "revenue": 0.6880324352831466,
+    "expenses": 0.20006452509581063,
+    "marketing_spend": 0.01942599163831354,
+    "employee_count": 0.007284587937003675,
+    "operational_cost": 0.08519246004572559
+  },
+  "model_type": "RandomForestRegressor",
+  "n_estimators": 200,
+  "training_samples": 4000,
+  "test_samples": 1000
+}

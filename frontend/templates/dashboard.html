@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard | BizOptima</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+  <link href="/static/css/style.css" rel="stylesheet" />
+</head>
+<body class="dashboard-body">
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-brand">
+      <span class="brand-mark"><i class="bi bi-graph-up-arrow"></i></span>
+      <span>BizOptima</span>
+    </div>
+    <nav class="sidebar-nav" aria-label="Dashboard navigation">
+      <a class="sidebar-link active" href="#" data-section="dashboard">
+        <i class="bi bi-speedometer2"></i><span>Dashboard</span>
+      </a>
+      <a class="sidebar-link" href="#" data-section="predict">
+        <i class="bi bi-cpu"></i><span>Predict Profit</span>
+      </a>
+      <a class="sidebar-link" href="#" data-section="whatif">
+        <i class="bi bi-sliders"></i><span>What-If Analysis</span>
+      </a>
+      <a class="sidebar-link" href="#" data-section="history">
+        <i class="bi bi-clock-history"></i><span>History</span>
+      </a>
+      <a class="sidebar-link" href="#" data-section="model">
+        <i class="bi bi-bar-chart-line"></i><span>Model Info</span>
+      </a>
+      <div class="sidebar-divider"></div>
+      <a class="sidebar-link sidebar-link-danger" href="#" id="logoutBtn">
+        <i class="bi bi-box-arrow-left"></i><span>Logout</span>
+      </a>
+    </nav>
+  </aside>
+
+  <main class="main-content" id="mainContent">
+    <header class="top-navbar">
+      <div class="d-flex align-items-center gap-3">
+        <button class="btn icon-button d-lg-none" id="sidebarToggle" type="button" aria-label="Open navigation">
+          <i class="bi bi-list"></i>
+        </button>
+        <div>
+          <p class="eyebrow mb-1">Workspace</p>
+          <h1 id="pageTitle">Dashboard</h1>
+        </div>
+      </div>
+      <div class="user-menu">
+        <div class="text-end d-none d-sm-block">
+          <span id="userGreeting">Welcome</span>
+          <small id="userBusiness">BizOptima user</small>
+        </div>
+        <div class="user-avatar" id="userAvatar">U</div>
+      </div>
+    </header>
+
+    <section id="section-dashboard" class="content-section">
+      <div class="container-fluid px-4 py-4">
+        <div class="row g-3 mb-4" id="summaryCards">
+          <div class="col-6 col-lg-3">
+            <div class="stat-card stat-blue">
+              <div class="stat-card-icon"><i class="bi bi-graph-up"></i></div>
+              <div class="stat-card-value" id="statTotalPredictions">--</div>
+              <div class="stat-card-label">Total Predictions</div>
+            </div>
+          </div>
+          <div class="col-6 col-lg-3">
+            <div class="stat-card stat-green">
+              <div class="stat-card-icon"><i class="bi bi-currency-dollar"></i></div>
+              <div class="stat-card-value" id="statAvgProfit">--</div>
+              <div class="stat-card-label">Average Profit</div>
+            </div>
+          </div>
+          <div class="col-6 col-lg-3">
+            <div class="stat-card stat-teal">
+              <div class="stat-card-icon"><i class="bi bi-heart-pulse"></i></div>
+              <div class="stat-card-value" id="statAvgHealth">--</div>
+              <div class="stat-card-label">Health Score</div>
+            </div>
+          </div>
+          <div class="col-6 col-lg-3">
+            <div class="stat-card stat-amber">
+              <div class="stat-card-icon"><i class="bi bi-trophy"></i></div>
+              <div class="stat-card-value" id="statBestProfit">--</div>
+              <div class="stat-card-label">Best Profit</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-3 mb-4">
+          <div class="col-lg-8">
+            <div class="chart-card">
+              <div class="chart-card-header">
+                <h2><i class="bi bi-graph-up text-primary"></i>Profit Trend</h2>
+                <span>Latest predictions</span>
+              </div>
+              <canvas id="profitTrendChart" height="110"></canvas>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="chart-card">
+              <div class="chart-card-header">
+                <h2><i class="bi bi-pie-chart text-danger"></i>Risk Distribution</h2>
+                <span>By prediction</span>
+              </div>
+              <canvas id="riskPieChart" height="170"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-3">
+          <div class="col-lg-6">
+            <div class="chart-card">
+              <div class="chart-card-header">
+                <h2><i class="bi bi-bar-chart text-success"></i>Revenue vs Expenses</h2>
+                <span>Recent entries</span>
+              </div>
+              <canvas id="revExpChart" height="130"></canvas>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="chart-card">
+              <div class="chart-card-header">
+                <h2><i class="bi bi-stars text-warning"></i>Feature Importance</h2>
+                <span>Model drivers</span>
+              </div>
+              <canvas id="featureChart" height="130"></canvas>
+            </div>
+          </div>
+        </div>
+
+        <div id="dashboardEmpty" class="empty-state d-none">
+          <i class="bi bi-bar-chart-line"></i>
+          <h2>No predictions yet</h2>
+          <p>Run your first prediction to unlock charts and account-level analytics.</p>
+          <button class="btn btn-primary" type="button" onclick="showSection('predict')">
+            <i class="bi bi-cpu me-2"></i>Make first prediction
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section id="section-predict" class="content-section d-none">
+      <div class="container-fluid px-4 py-4">
+        <div class="row g-4">
+          <div class="col-lg-5">
+            <div class="form-card">
+              <div class="section-kicker"><i class="bi bi-cpu"></i>AI forecast</div>
+              <h2>Predict business profit</h2>
+              <p>Enter your current business figures and generate a saved forecast.</p>
+
+              <form id="predictForm" class="mt-4">
+                <div class="mb-3">
+                  <label class="form-label" for="p_revenue">Revenue ($)</label>
+                  <div class="input-group">
+                    <span class="input-group-text dash-input-icon">$</span>
+                    <input type="number" class="form-control dash-input" id="p_revenue" placeholder="500000" min="0" step="1000" required />
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label" for="p_expenses">Expenses ($)</label>
+                  <div class="input-group">
+                    <span class="input-group-text dash-input-icon">$</span>
+                    <input type="number" class="form-control dash-input" id="p_expenses" placeholder="200000" min="0" step="1000" required />
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label" for="p_marketing">Marketing spend ($)</label>
+                  <div class="input-group">
+                    <span class="input-group-text dash-input-icon">$</span>
+                    <input type="number" class="form-control dash-input" id="p_marketing" placeholder="50000" min="0" step="1000" required />
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label" for="p_employees">Employee count</label>
+                  <div class="input-group">
+                    <span class="input-group-text dash-input-icon"><i class="bi bi-people"></i></span>
+                    <input type="number" class="form-control dash-input" id="p_employees" placeholder="25" min="1" step="1" required />
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label" for="p_opex">Operational cost ($)</label>
+                  <div class="input-group">
+                    <span class="input-group-text dash-input-icon">$</span>
+                    <input type="number" class="form-control dash-input" id="p_opex" placeholder="80000" min="0" step="1000" required />
+                  </div>
+                </div>
+                <div class="mb-4">
+                  <label class="form-label" for="p_name">Report name</label>
+                  <input type="text" class="form-control dash-input" id="p_name" placeholder="Q4 planning forecast" />
+                </div>
+                <button type="submit" class="btn btn-primary w-100 py-2" id="predictBtn">
+                  <span id="predictBtnText"><i class="bi bi-cpu me-2"></i>Run prediction</span>
+                  <span id="predictSpinner" class="d-none"><span class="spinner-border spinner-border-sm me-2"></span>Analyzing...</span>
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <div class="col-lg-7">
+            <div id="resultsEmpty" class="results-empty">
+              <i class="bi bi-clipboard-data"></i>
+              <p>Your prediction results will appear here.</p>
+            </div>
+
+            <div id="resultsPanel" class="d-none">
+              <div class="result-profit-card mb-3">
+                <div>
+                  <span>Predicted profit</span>
+                  <strong class="profit-value" id="r_profit">$0</strong>
+                </div>
+                <div class="text-end">
+                  <span>Prediction ID</span>
+                  <strong id="r_id">#--</strong>
+                </div>
+              </div>
+
+              <div class="row g-3 mb-3">
+                <div class="col-4">
+                  <div class="metric-card">
+                    <div class="metric-label">Health score</div>
+                    <div class="metric-value" id="r_health">--</div>
+                    <div class="health-bar-wrap"><div class="health-bar" id="r_healthBar"></div></div>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="metric-card">
+                    <div class="metric-label">Risk level</div>
+                    <div class="metric-value" id="r_risk">--</div>
+                  </div>
+                </div>
+                <div class="col-4">
+                  <div class="metric-card">
+                    <div class="metric-label">Profit margin</div>
+                    <div class="metric-value" id="r_margin">--</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row g-3 mb-3">
+                <div class="col-6">
+                  <div class="metric-card">
+                    <div class="metric-label">Expense ratio</div>
+                    <div class="metric-value" id="r_expenseRatio">--</div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="metric-card">
+                    <div class="metric-label">Marketing ROI</div>
+                    <div class="metric-value" id="r_roi">--</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="suggestions-card">
+                <h2><i class="bi bi-lightbulb text-warning"></i>Smart recommendations</h2>
+                <div id="r_suggestions"></div>
+              </div>
+
+              <div class="d-flex flex-wrap gap-2 mt-3">
+                <button class="btn btn-outline-success btn-sm" id="exportPdfBtn" type="button">
+                  <i class="bi bi-file-earmark-pdf me-1"></i>Export PDF
+                </button>
+                <button class="btn btn-outline-primary btn-sm" type="button" onclick="showSection('history')">
+                  <i class="bi bi-clock-history me-1"></i>View history
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="section-whatif" class="content-section d-none">
+      <div class="container-fluid px-4 py-4">
+        <div class="page-intro">
+          <div class="section-kicker"><i class="bi bi-sliders"></i>Scenario planning</div>
+          <h2>What-if analysis</h2>
+          <p>Compare an original scenario against a modified scenario to see how business changes affect profit.</p>
+        </div>
+
+        <div class="row g-4 align-items-stretch">
+          <div class="col-lg-5">
+            <div class="form-card h-100">
+              <h3>Original scenario</h3>
+              <div class="row g-3 mt-2">
+                <div class="col-12"><label class="form-label" for="w_o_revenue">Revenue ($)</label><input type="number" class="form-control dash-input" id="w_o_revenue" placeholder="500000" /></div>
+                <div class="col-12"><label class="form-label" for="w_o_expenses">Expenses ($)</label><input type="number" class="form-control dash-input" id="w_o_expenses" placeholder="200000" /></div>
+                <div class="col-12"><label class="form-label" for="w_o_marketing">Marketing spend ($)</label><input type="number" class="form-control dash-input" id="w_o_marketing" placeholder="50000" /></div>
+                <div class="col-12"><label class="form-label" for="w_o_employees">Employees</label><input type="number" class="form-control dash-input" id="w_o_employees" placeholder="25" /></div>
+                <div class="col-12"><label class="form-label" for="w_o_opex">Operational cost ($)</label><input type="number" class="form-control dash-input" id="w_o_opex" placeholder="80000" /></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-5">
+            <div class="form-card h-100 accent-card">
+              <h3>Modified scenario</h3>
+              <div class="row g-3 mt-2">
+                <div class="col-12"><label class="form-label" for="w_m_revenue">Revenue ($)</label><input type="number" class="form-control dash-input" id="w_m_revenue" placeholder="600000" /></div>
+                <div class="col-12"><label class="form-label" for="w_m_expenses">Expenses ($)</label><input type="number" class="form-control dash-input" id="w_m_expenses" placeholder="180000" /></div>
+                <div class="col-12"><label class="form-label" for="w_m_marketing">Marketing spend ($)</label><input type="number" class="form-control dash-input" id="w_m_marketing" placeholder="70000" /></div>
+                <div class="col-12"><label class="form-label" for="w_m_employees">Employees</label><input type="number" class="form-control dash-input" id="w_m_employees" placeholder="30" /></div>
+                <div class="col-12"><label class="form-label" for="w_m_opex">Operational cost ($)</label><input type="number" class="form-control dash-input" id="w_m_opex" placeholder="75000" /></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-2 d-flex align-items-center">
+            <button class="btn btn-primary w-100 py-3" id="compareBtn" type="button" onclick="runWhatIf()">
+              <i class="bi bi-arrows-collapse d-block fs-4 mb-1"></i>Compare
+            </button>
+          </div>
+        </div>
+
+        <div id="whatifResults" class="mt-4 d-none">
+          <div class="row g-3">
+            <div class="col-lg-4">
+              <div class="compare-card border-primary">
+                <div class="compare-label">Original</div>
+                <div class="compare-profit" id="w_o_profit">--</div>
+                <div class="text-muted small" id="w_o_risk">--</div>
+                <div class="text-muted small">Health: <span id="w_o_health">--</span></div>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="compare-card border-info">
+                <div class="compare-label">Modified</div>
+                <div class="compare-profit" id="w_m_profit">--</div>
+                <div class="text-muted small" id="w_m_risk">--</div>
+                <div class="text-muted small">Health: <span id="w_m_health">--</span></div>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="compare-card" id="w_diff_card">
+                <div class="compare-label">Change</div>
+                <div class="compare-profit" id="w_diff_profit">--</div>
+                <div class="text-muted small" id="w_diff_summary">--</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="section-history" class="content-section d-none">
+      <div class="container-fluid px-4 py-4">
+        <div class="page-toolbar">
+          <div>
+            <div class="section-kicker"><i class="bi bi-clock-history"></i>Audit trail</div>
+            <h2>Prediction history</h2>
+            <p>All saved predictions for your account.</p>
+          </div>
+          <button class="btn btn-outline-success btn-sm" type="button" onclick="exportCSV()">
+            <i class="bi bi-download me-1"></i>Export CSV
+          </button>
+        </div>
+        <div class="table-card">
+          <div class="table-responsive">
+            <table class="table dash-table" id="historyTable">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Date</th>
+                  <th>Revenue</th>
+                  <th>Expenses</th>
+                  <th>Pred. Profit</th>
+                  <th>Risk</th>
+                  <th>Health</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="historyTableBody">
+                <tr><td colspan="8" class="text-center text-muted py-4">Loading...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="section-model" class="content-section d-none">
+      <div class="container-fluid px-4 py-4">
+        <div class="page-intro">
+          <div class="section-kicker"><i class="bi bi-bar-chart-line"></i>Model details</div>
+          <h2>ML model information</h2>
+          <p>Random Forest Regressor performance metrics and feature importances.</p>
+        </div>
+        <div class="row g-3 mb-4" id="modelMetricsCards">
+          <div class="col-6 col-lg-3">
+            <div class="stat-card stat-green">
+              <div class="stat-card-icon"><i class="bi bi-percent"></i></div>
+              <div class="stat-card-value" id="m_r2">--</div>
+              <div class="stat-card-label">R2 Accuracy</div>
+            </div>
+          </div>
+          <div class="col-6 col-lg-3">
+            <div class="stat-card stat-blue">
+              <div class="stat-card-icon"><i class="bi bi-bullseye"></i></div>
+              <div class="stat-card-value" id="m_mae">--</div>
+              <div class="stat-card-label">MAE</div>
+            </div>
+          </div>
+          <div class="col-6 col-lg-3">
+            <div class="stat-card stat-teal">
+              <div class="stat-card-icon"><i class="bi bi-calculator"></i></div>
+              <div class="stat-card-value" id="m_rmse">--</div>
+              <div class="stat-card-label">RMSE</div>
+            </div>
+          </div>
+          <div class="col-6 col-lg-3">
+            <div class="stat-card stat-amber">
+              <div class="stat-card-icon"><i class="bi bi-tree"></i></div>
+              <div class="stat-card-value" id="m_trees">--</div>
+              <div class="stat-card-label">Estimators</div>
+            </div>
+          </div>
+        </div>
+        <div class="chart-card">
+          <div class="chart-card-header">
+            <h2><i class="bi bi-bar-chart-steps text-primary"></i>Feature Importances</h2>
+            <span>Relative model influence</span>
+          </div>
+          <canvas id="modelFeatureChart" height="115"></canvas>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+  <script src="/static/js/auth.js"></script>
+  <script src="/static/js/dashboard.js"></script>
+</body>
+</html>

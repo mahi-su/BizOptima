@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BizOptima | AI Business Forecasting</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet" />
+  <link href="/static/css/style.css" rel="stylesheet" />
+</head>
+<body class="landing-body">
+  <nav class="navbar navbar-expand-lg app-navbar fixed-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="/">
+        <span class="brand-mark"><i class="bi bi-graph-up-arrow"></i></span>
+        <span class="brand-word">BizOptima</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+          <li class="nav-item"><a class="nav-link" href="#platform">Platform</a></li>
+          <li class="nav-item"><a class="nav-link" href="#workflow">Workflow</a></li>
+          <li class="nav-item"><a class="btn btn-ghost btn-sm px-3" href="/login">Sign in</a></li>
+          <li class="nav-item"><a class="btn btn-primary btn-sm px-3" href="/register">Create account</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <section class="hero-section">
+      <div class="container hero-content">
+        <div class="row align-items-center g-5">
+          <div class="col-lg-6">
+            <div class="eyebrow mb-3">AI-powered financial planning</div>
+            <h1 class="hero-title">BizOptima</h1>
+            <p class="hero-subtitle">
+              Forecast profit, understand business risk, and turn operating data into clear decisions for every user on your team.
+            </p>
+            <div class="d-flex flex-wrap gap-3 mt-4">
+              <a href="/register" class="btn btn-primary btn-lg px-4">
+                <i class="bi bi-person-plus me-2"></i>Create account
+              </a>
+              <a href="/login" class="btn btn-outline-dark btn-lg px-4">
+                <i class="bi bi-box-arrow-in-right me-2"></i>Sign in
+              </a>
+            </div>
+            <div class="hero-metrics">
+              <div>
+                <strong>5</strong>
+                <span>Core business inputs</span>
+              </div>
+              <div>
+                <strong>3</strong>
+                <span>Risk levels</span>
+              </div>
+              <div>
+                <strong>24/7</strong>
+                <span>Local access</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="product-preview" aria-label="BizOptima dashboard preview">
+              <div class="preview-toolbar">
+                <span></span><span></span><span></span>
+                <div class="preview-title">Executive Overview</div>
+              </div>
+              <div class="preview-grid">
+                <div class="preview-card">
+                  <small>Predicted profit</small>
+                  <strong>$128.4K</strong>
+                  <span class="trend positive"><i class="bi bi-arrow-up-right"></i> 18.2%</span>
+                </div>
+                <div class="preview-card">
+                  <small>Health score</small>
+                  <strong>82/100</strong>
+                  <span class="trend neutral"><i class="bi bi-shield-check"></i> Stable</span>
+                </div>
+                <div class="preview-chart">
+                  <div style="height: 44%"></div>
+                  <div style="height: 68%"></div>
+                  <div style="height: 52%"></div>
+                  <div style="height: 84%"></div>
+                  <div style="height: 72%"></div>
+                  <div style="height: 92%"></div>
+                </div>
+                <div class="preview-insight">
+                  <i class="bi bi-lightbulb"></i>
+                  <p>Marketing ROI is strong. Consider increasing spend in the highest-converting channels.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="platform" class="section-band">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">Platform</span>
+          <h2>Professional analytics for everyday business decisions.</h2>
+          <p>Each account gets a private workspace for predictions, history, exports, and what-if planning.</p>
+        </div>
+        <div class="row g-4">
+          <div class="col-md-4">
+            <div class="feature-card h-100">
+              <div class="feature-icon"><i class="bi bi-cpu"></i></div>
+              <h3>Profit forecasting</h3>
+              <p>Estimate future profit from revenue, expenses, marketing spend, employee count, and operating costs.</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="feature-card h-100">
+              <div class="feature-icon"><i class="bi bi-shield-check"></i></div>
+              <h3>User authentication</h3>
+              <p>Signup and signin pages protect each user account with hashed passwords and JWT-based sessions.</p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="feature-card h-100">
+              <div class="feature-icon"><i class="bi bi-file-earmark-arrow-down"></i></div>
+              <h3>Reports and exports</h3>
+              <p>Download polished PDF reports or export prediction history as CSV for business review.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="workflow" class="section-band section-muted">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">Workflow</span>
+          <h2>From inputs to decisions in minutes.</h2>
+        </div>
+        <div class="workflow-list">
+          <div class="workflow-step">
+            <span>01</span>
+            <div>
+              <h3>Create your account</h3>
+              <p>Register as a new user and keep your business predictions separate from everyone else.</p>
+            </div>
+          </div>
+          <div class="workflow-step">
+            <span>02</span>
+            <div>
+              <h3>Run a prediction</h3>
+              <p>Add financial inputs and let the model estimate profit, health score, and risk.</p>
+            </div>
+          </div>
+          <div class="workflow-step">
+            <span>03</span>
+            <div>
+              <h3>Act on insights</h3>
+              <p>Use the dashboard, what-if comparison, and exports to support better planning.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container d-flex flex-column flex-md-row align-items-center justify-content-between gap-2">
+      <div class="d-flex align-items-center gap-2">
+        <span class="brand-mark brand-mark-sm"><i class="bi bi-graph-up-arrow"></i></span>
+        <span class="fw-semibold">BizOptima</span>
+      </div>
+      <small>AI business forecasting platform built with Flask, Scikit-learn, Chart.js, and Bootstrap.</small>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    window.addEventListener('scroll', () => {
+      document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 24);
+    });
+  </script>
+</body>
+</html>
